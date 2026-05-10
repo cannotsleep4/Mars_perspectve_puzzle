@@ -1,3 +1,61 @@
+# Rotation Puzzle Level
+
+## Description
+A 3D rotation puzzle level template built with **Godot 4**.
+The player drags the mouse to rotate a model. When the model aligns to the target angle, a win effect triggers (fade to black transition to the next level).
+
+## Requirements
+- Godot 4.x (4.2 or above recommended)
+
+## How to Use
+1. Download or Clone this repository
+2. Open `project.godot` with Godot 4
+3. Run the main scene `main.tscn`
+
+## How to Customize
+
+### Set the Target Angle
+Select the `PuzzleObject` node in the scene tree, then adjust in the Inspector panel:
+- `Target Rotation` — the angle the player needs to rotate to (X, Y, Z)
+- `Rot Threshold` — the margin of error for a successful match (degrees), default 5.0
+
+**Tip:** Run the game, manually rotate the model to the desired position, press **F1** to record the current angle, then copy that value into `Target Rotation`.
+
+### Change the Next Scene
+Open `pivot_point.gd` and find the `_on_win()` function:
+```gdscript
+func _on_win():
+    _start_glow_then_fade("res://scenes/next_level.tscn")  # ← change to your next scene path
+```
+
+### Parameters Reference
+| Parameter | Description | Default |
+|---|---|---|
+| `target_rotation` | Target angle | (20, 3.2, 0) |
+| `rot_threshold` | Match threshold (degrees) | 5.0 |
+| `rotate_speed` | Mouse drag rotation speed | 0.5 |
+| `snap_threshold` | Distance to start auto-snapping (degrees) | 15.0 |
+| `snap_speed` | Auto-snap speed | 5.0 |
+
+## Debug Shortcuts
+Available in debug builds only:
+
+| Key | Function |
+|---|---|
+| F1 | Save current angle as target rotation |
+| F2 | Jump to target angle (test win condition) |
+| F3 | Reset rotation to (0, 0, 0) |
+
+## File Structure
+| File | Description |
+|---|---|
+| `main.tscn` | Main scene |
+| `pivot_point.gd` | Rotation control + win logic script |
+| `yinghuo.fbx` | 3D model file |
+| `yinghuo_openPBR_shader1_*.png` | Model textures (BaseColor / Emissive / Height / Metallic / Normal / Roughness) |
+| `puzzle.png` | Reference image |
+
+----------------------------------------------------------------------------
 # 旋转解谜关卡 / Rotation Puzzle Level
 
 ## 介绍
