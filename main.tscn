@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bt8k6yljcgu3"]
+
+[ext_resource type="PackedScene" uid="uid://ds3gmo5y8idq3" path="res://yinghuo.fbx" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://m18llp4mubpk" path="res://puzzle.png" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://bfmo6vfbv4jcj" path="res://pivot_point.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://pcbg0k7kys5f" path="res://yinghuo_openPBR_shader1_BaseColor.png" id="3_lquwl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
+albedo_texture = ExtResource("3_lquwl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_lquwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+transparency = 1
+albedo_texture = ExtResource("3_1bvp3")
+
+[node name="main" type="Node3D" unique_id=1762015694]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1786324429]
+transform = Transform3D(0.9979302, -0.02717684, 0.05828092, 0, 0.9063078, 0.42261827, -0.06430588, -0.42174357, 0.90443194, -1.6707404, 4.633256, 5.016626)
+current = true
+fov = 37.467476
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1398215654]
+transform = Transform3D(0.8633569, 0.029571638, 0.5037267, -0.20378257, 0.9336849, 0.29445824, -0.4616142, -0.35687324, 0.8121293, 0.21588898, 6.333605, 7.736261)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=4937049]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1323351545]
+transform = Transform3D(3.4368088e-07, 3.485113e-05, 0.99999994, 0.95676804, 0.2908526, -1.0465362e-05, -0.29085258, 0.9567681, -3.3244472e-05, 0, 2.765027, -4.213562)
+mesh = SubResource("PlaneMesh_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=319268752]
+shape = SubResource("WorldBoundaryShape3D_1bvp3")
+
+[node name="PivotPoint" type="Node3D" parent="." unique_id=2122630250]
+transform = Transform3D(0.84601307, -0.5288496, -0.06767557, -0.1988124, -0.43069777, 0.8803255, -0.49470755, -0.7313123, -0.4695179, -0.6638181, 2.0814755, 0.72589636)
+script = ExtResource("3_h2yge")
+
+[node name="PuzzleObject" parent="PivotPoint" unique_id=457033846 instance=ExtResource("2_h2yge")]
+transform = Transform3D(-11.451172, -12.841556, 10.19633, 16.004353, -6.0468674, 10.358381, -3.5680897, 14.090058, 13.738234, 1.1263099, 0.5252071, -1.3106819)
+
+[node name="pCylinder2" parent="PivotPoint/PuzzleObject" index="0" unique_id=1115927407]
+material_override = SubResource("StandardMaterial3D_272bh")
+
+[node name="TargetIndicator" type="MeshInstance3D" parent="." unique_id=346344411]
+transform = Transform3D(20.995457, -0.49279708, 0.07344052, 0.3811913, 21.4451, 0.6406534, -0.5320718, -4.081918, 3.3569212, -4.1812425, 0.2271061, -2.236883)
+mesh = SubResource("QuadMesh_lquwl")
+surface_material_override/0 = SubResource("StandardMaterial3D_7mycd")
+
+[editable path="PivotPoint/PuzzleObject"]
